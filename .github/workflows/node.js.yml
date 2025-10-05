@@ -30,9 +30,16 @@ jobs:
     needs: build_test
     if: github.ref == 'refs/heads/main'
     
+    # steps:
+    #   - name: Deploy to production
+    #     uses: johnbeynon/render-deploy-action@v0.0.8
+    #     with:
+    #       service-id: ${{ secrets.MY_RENDER_SERVICE_ID }} # e.g. srv-abcde
+    #       api-key: ${{ secrets.MY_RENDER_API_KEY }} # e.g. render-abcde
+    # alternative
     steps:
-      - name: Deploy to production
-        uses: johnbeynon/render-deploy-action@v0.0.8
-        with:
-          service-id: ${{ secrets.MY_RENDER_SERVICE_ID }} # e.g. srv-abcde
-          api-key: ${{ secrets.MY_RENDER_API_KEY }} # e.g. render-abcde
+    - uses: JorgeLNJunior/render-deploy@v1.4.5
+      with:
+        service_id: ${{ secrets.MY_RENDER_SERVICE_ID }}
+        api_key: ${{ secrets.MY_RENDER_API_KEY }}
+        wait_deploy: true
